@@ -3,7 +3,7 @@ package com.example.mk1.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.mk1.entity.Task;
+import com.example.mk1.entity.Tasks;
 import com.example.mk1.repository.TaskRepository;
 
 import java.util.List;
@@ -19,19 +19,19 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAllTasks() {
+    public List<Tasks> getAllTasks() {
         return taskRepository.findAll();
     }
 
-    public  Task saveTask(Task task) {
+    public  Tasks saveTask(Tasks task) {
         return taskRepository.save(task);
     }
 
-    public Optional<Task> getTaskById(Long id) {
+    public Optional<Tasks> getTaskById(Long id) {
         return taskRepository.findById(id);
     }
 
-    public Task updateTask(Task task) {
+    public Tasks updateTask(Tasks task) {
         return taskRepository.save(task);
     }
 

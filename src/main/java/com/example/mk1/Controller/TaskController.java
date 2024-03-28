@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.mk1.entity.Task;
+import com.example.mk1.entity.Tasks;
 import com.example.mk1.service.TaskService;
 
 import java.util.List;
@@ -24,29 +24,29 @@ public class TaskController {
 
     // REST API
     @GetMapping("/api/get")
-    public ResponseEntity <List<Task>> getAllTasks() {
-        List<Task> tasks = taskService.getAllTasks();
+    public ResponseEntity <List<Tasks>> getAllTasks() {
+        List<Tasks> tasks = taskService.getAllTasks();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @PostMapping("/api/post")
     @ResponseBody
-    public Task createTask(@RequestBody Task task) {
+    public Tasks createTask(@RequestBody Tasks task) {
         return taskService.saveTask(task);
     }
 
     @PutMapping("/api/put/{id}")
     @ResponseBody
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
-        Optional<Task> optionalTask = taskService.getTaskById(id);
+    public ResponseEntity<Tasks> updateTask(@PathVariable Long id, @RequestBody Tasks updatedTask) {
+        Optional<Tasks> optionalTask = taskService.getTaskById(id);
     
         if (optionalTask.isPresent()) {
-            Task existingTask = optionalTask.get();
+            Tasks existingTask = optionalTask.get();
             existingTask.setName(updatedTask.getName());
             existingTask.setDate(updatedTask.getDate());
             existingTask.setCompleted(updatedTask.isCompleted());
         
-            Task savedTask = taskService.updateTask(existingTask);
+            Tasks savedTask = taskService.updateTask(existingTask);
             return ResponseEntity.ok(savedTask);
         } else {
             return ResponseEntity.notFound().build();
